@@ -6,7 +6,7 @@ Project members:
 
 Jonothan Garcia-Rovetta:
 
-![](teamphotos/jonathan.jpeg)
+![](teamphotos/jonathan.jpeg  =250x)
 
 Steven Lara:
 
