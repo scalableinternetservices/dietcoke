@@ -3,6 +3,7 @@
 Welcome to Electify!
 
 Project members:
+
 Jonothan Garcia-Rovetta:
 ![](teamphotos/jonathan.jpeg)
 
