@@ -20,6 +20,7 @@ type Query {
 
   surveys: [Survey!]!
   survey (surveyId: Int!): Survey
+  candidates: [Candidate!]!
 }
 
 type Mutation {
@@ -38,6 +39,11 @@ type User {
   id: Int!
   userType: UserType!
   email: String!
+  name: String!
+}
+
+type Candidate {
+  voteCount: Int!
   name: String!
 }
 

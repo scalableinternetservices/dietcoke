@@ -24,6 +24,25 @@ export interface FetchUserContext {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: FetchCandidates
+// ====================================================
+
+export interface FetchCandidates_candidates {
+  __typename: "Candidate";
+  voteCount: number;
+  name: string;
+}
+
+export interface FetchCandidates {
+  candidates: FetchCandidates_candidates[];
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: FetchSurveys
 // ====================================================
 
@@ -185,6 +204,21 @@ export interface NextSurveyQuestion {
 
 export interface NextSurveyQuestionVariables {
   surveyId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: Candidate
+// ====================================================
+
+export interface Candidate {
+  __typename: "Candidate";
+  voteCount: number;
+  name: string;
 }
 
 /* tslint:disable */
