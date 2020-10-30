@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import { RouteComponentProps } from '@reach/router'
 import * as React from 'react'
 import { useState } from 'react'
-import { FetchCandidates } from '../../graphql/query.gen'
+import { Candidate, FetchCandidates } from '../../graphql/query.gen'
 import { Button } from '../../style/button'
 import { Input } from '../../style/input'
 import { Spacer } from '../../style/spacer'
@@ -20,10 +20,32 @@ export function ElectionPage(props: ElectionPageProps) {
 function getElectionApp(app?: PlaygroundApp) {
   const [userQuery, setUserQuery] = useState('')
   const { loading, data } = useQuery<FetchCandidates>(fetchCandidates)
+  const [rankedCandidates, setRankedCandidates] = useState([-4])
 
+  function doVoteForCandidate(candidate: Candidate) {
+    let id = candidate.id
+    const candidateRank = rankedCandidates.indexOf(id)
+    if (candidateRank == -1) {
+      setRankedCandidates(rankedCandidates.concat(id))
+      //alert("Voted for: " + candidate.name + " at rank: " + rankedCandidates.length)
+    } else {
+      let newRanks = rankedCandidates.slice()
+      newRanks.splice(candidateRank, 1)
+      setRankedCandidates(newRanks)
+    }
+  }
 
-  function doVoteForCandidate(name: string) {
-    alert("Voted for: " + name)
+  function submit(){
+    alert("Submitted")
+  }
+
+  function getRank(candidateID: number) {
+    let candidateRank = rankedCandidates.indexOf(candidateID)
+    if(candidateRank == -1){
+      return "Vote"
+    } else {
+      return candidateRank
+    }
   }
 
   if (loading) {
@@ -42,11 +64,13 @@ function getElectionApp(app?: PlaygroundApp) {
         .sort((a, b) => b.voteCount - a.voteCount)
         .map((candidate, i) => (
           <div key={i} className="pa3 br2 mb2 bg-black-10 flex items-center">
-            <Button onClick={() => doVoteForCandidate(candidate.name)}>🍬</Button>
+            <Button onClick={() => doVoteForCandidate(candidate)}>{getRank(candidate.id)}</Button>
             <Spacer $w4 />
             {candidate.name} · {candidate.voteCount}
           </div>
         ))}
+      <Spacer $h4 />
+      <Button onClick={() => submit()}>Submit</Button>
     </div>
   )
   }
