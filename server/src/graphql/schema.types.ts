@@ -41,10 +41,15 @@ export interface MutationNextSurveyQuestionArgs {
 export interface Subscription {
   __typename?: 'Subscription'
   surveyUpdates?: Maybe<Survey>
+  candidateUpdates?: Maybe<Candidate>
 }
 
 export interface SubscriptionSurveyUpdatesArgs {
   surveyId: Scalars['Int']
+}
+
+export interface SubscriptionCandidateUpdatesArgs {
+  candidateId: Scalars['Int']
 }
 
 export interface User {
@@ -57,6 +62,7 @@ export interface User {
 
 export interface Candidate {
   __typename?: 'Candidate'
+  id: Scalars['Int']
   voteCount: Scalars['Int']
   name: Scalars['String']
 }
@@ -249,6 +255,13 @@ export type SubscriptionResolvers<
     ContextType,
     RequireFields<SubscriptionSurveyUpdatesArgs, 'surveyId'>
   >
+  candidateUpdates?: SubscriptionResolver<
+    Maybe<ResolversTypes['Candidate']>,
+    'candidateUpdates',
+    ParentType,
+    ContextType,
+    RequireFields<SubscriptionCandidateUpdatesArgs, 'candidateId'>
+  >
 }
 
 export type UserResolvers<
@@ -266,6 +279,7 @@ export type CandidateResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Candidate'] = ResolversParentTypes['Candidate']
 > = {
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
   voteCount?: Resolver<ResolversTypes['Int'], ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType>

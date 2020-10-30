@@ -43,6 +43,25 @@ export interface FetchCandidates {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL subscription operation: CandidateSubscription
+// ====================================================
+
+export interface CandidateSubscription_candidateUpdates {
+  __typename: "Candidate";
+  voteCount: number;
+  name: string;
+}
+
+export interface CandidateSubscription {
+  candidateUpdates: CandidateSubscription_candidateUpdates | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: FetchSurveys
 // ====================================================
 

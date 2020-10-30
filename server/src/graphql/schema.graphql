@@ -33,6 +33,7 @@ type Mutation {
 
 type Subscription {
   surveyUpdates (surveyId: Int!): Survey
+  candidateUpdates (candidateId: Int!): Candidate
 }
 
 type User {
@@ -43,6 +44,7 @@ type User {
 }
 
 type Candidate {
+  id: Int!
   voteCount: Int!
   name: String!
 }
