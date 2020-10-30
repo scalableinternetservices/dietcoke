@@ -10,11 +10,10 @@ import { AppRouteParams, PlaygroundApp } from '../nav/route'
 import { fetchCandidates } from './fetchCandidates'
 import { Page } from './Page'
 
-
 interface ElectionPageProps extends RouteComponentProps, AppRouteParams {}
 
 export function ElectionPage(props: ElectionPageProps) {
-    return <Page>{getElectionApp(props.app)}</Page>
+  return <Page>{getElectionApp(props.app)}</Page>
 }
 
 function getElectionApp(app?: PlaygroundApp) {
@@ -23,26 +22,26 @@ function getElectionApp(app?: PlaygroundApp) {
   const [rankedCandidates, setRankedCandidates] = useState([-4])
 
   function doVoteForCandidate(candidate: Candidate) {
-    let id = candidate.id
+    const id = candidate.id
     const candidateRank = rankedCandidates.indexOf(id)
     if (candidateRank == -1) {
       setRankedCandidates(rankedCandidates.concat(id))
       //alert("Voted for: " + candidate.name + " at rank: " + rankedCandidates.length)
     } else {
-      let newRanks = rankedCandidates.slice()
+      const newRanks = rankedCandidates.slice()
       newRanks.splice(candidateRank, 1)
       setRankedCandidates(newRanks)
     }
   }
 
-  function submit(){
-    alert("Submitted")
+  function submit() {
+    alert('Submitted')
   }
 
   function getRank(candidateID: number) {
-    let candidateRank = rankedCandidates.indexOf(candidateID)
-    if(candidateRank == -1){
-      return "Vote"
+    const candidateRank = rankedCandidates.indexOf(candidateID)
+    if (candidateRank == -1) {
+      return 'Vote'
     } else {
       return candidateRank
     }
@@ -57,6 +56,10 @@ function getElectionApp(app?: PlaygroundApp) {
 
   return (
     <div className="mw6">
+      <header>
+        <b>Rank Candidates in order of preference</b>
+      </header>
+      <p>Search for a candidate...</p>
       <Input $onChange={setUserQuery} />
       <Spacer $h4 />
       {data.candidates
@@ -73,4 +76,4 @@ function getElectionApp(app?: PlaygroundApp) {
       <Button onClick={() => submit()}>Submit</Button>
     </div>
   )
-  }
+}

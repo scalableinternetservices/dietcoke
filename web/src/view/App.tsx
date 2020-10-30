@@ -10,11 +10,12 @@ import { style } from '../style/styled'
 import { fetchUser } from './auth/fetchUser'
 import { UserContext, UserCtx } from './auth/user'
 import { Route } from './nav/route'
+import { ElectionPage } from './page/ElectionPage'
 import { HomePage } from './page/HomePage'
 import { LecturesPage } from './page/LecturesPage'
 import { PlaygroundPage } from './page/PlaygroundPage'
 import { ProjectsPage } from './page/ProjectsPage'
-import { ElectionPage } from './page/ElectionPage'
+import { RegisterPage } from './page/RegisterPage'
 
 const Styletron = require('styletron-engine-monolithic')
 
@@ -59,6 +60,7 @@ export function AppBody() {
         <PlaygroundPage path={Route.PLAYGROUND} />
         <PlaygroundPage path={Route.PLAYGROUND_APP} />
         <ElectionPage path={Route.ELECTION} />
+        <RegisterPage path={Route.REGISTER} />
       </Router>
       <Footer>
         <FooterText>© 2020 John Rothfels</FooterText>
