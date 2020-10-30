@@ -1,6 +1,9 @@
 import { RouteComponentProps } from '@reach/router'
 import * as React from 'react'
+import { useContext } from 'react'
 import { Login } from '../auth/Login'
+import { Signup } from '../auth/Signup'
+import { UserContext } from '../auth/user'
 import { AppRouteParams, PlaygroundApp } from '../nav/route'
 import { Page } from './Page'
 
@@ -11,13 +14,11 @@ export function RegisterPage(props: RegisterPageProps) {
 }
 
 function getRegisterApp(app?: PlaygroundApp) {
-  if (!app) {
-    return <div>choose an app</div>
+  const { user } = useContext(UserContext)
+  console.log()
+  if (!user) {
+    return <Signup />
   }
-  switch (app) {
-    case PlaygroundApp.LOGIN:
-      return <Login />
-    default:
-      throw new Error('no app found')
-  }
+
+  return <Login />
 }
