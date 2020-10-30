@@ -29,6 +29,7 @@ export interface FetchUserContext {
 
 export interface FetchCandidates_candidates {
   __typename: "Candidate";
+  id: number;
   voteCount: number;
   name: string;
 }
@@ -48,6 +49,7 @@ export interface FetchCandidates {
 
 export interface CandidateSubscription_candidateUpdates {
   __typename: "Candidate";
+  id: number;
   voteCount: number;
   name: string;
 }
@@ -236,6 +238,7 @@ export interface NextSurveyQuestionVariables {
 
 export interface Candidate {
   __typename: "Candidate";
+  id: number;
   voteCount: number;
   name: string;
 }
