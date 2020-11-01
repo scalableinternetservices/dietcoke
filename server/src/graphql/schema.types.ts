@@ -28,6 +28,8 @@ export interface Mutation {
   __typename?: 'Mutation'
   answerSurvey: Scalars['Boolean']
   nextSurveyQuestion?: Maybe<Survey>
+  increaseVoteCount: Scalars['Boolean']
+  updateUserCandidateIds: Scalars['Boolean']
 }
 
 export interface MutationAnswerSurveyArgs {
@@ -36,6 +38,15 @@ export interface MutationAnswerSurveyArgs {
 
 export interface MutationNextSurveyQuestionArgs {
   surveyId: Scalars['Int']
+}
+
+export interface MutationIncreaseVoteCountArgs {
+  candidateId?: Maybe<Scalars['Int']>
+  count?: Maybe<Scalars['Int']>
+}
+
+export interface MutationUpdateUserCandidateIdsArgs {
+  candidateIds?: Maybe<Array<Scalars['Int']>>
 }
 
 export interface Subscription {
@@ -48,16 +59,13 @@ export interface SubscriptionSurveyUpdatesArgs {
   surveyId: Scalars['Int']
 }
 
-export interface SubscriptionCandidateUpdatesArgs {
-  candidateId: Scalars['Int']
-}
-
 export interface User {
   __typename?: 'User'
   id: Scalars['Int']
   userType: UserType
   email: Scalars['String']
   name: Scalars['String']
+  candidateIds: Array<Scalars['Int']>
 }
 
 export interface Candidate {
@@ -242,6 +250,18 @@ export type MutationResolvers<
     ContextType,
     RequireFields<MutationNextSurveyQuestionArgs, 'surveyId'>
   >
+  increaseVoteCount?: Resolver<
+    ResolversTypes['Boolean'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationIncreaseVoteCountArgs, never>
+  >
+  updateUserCandidateIds?: Resolver<
+    ResolversTypes['Boolean'],
+    ParentType,
+    ContextType,
+    RequireFields<MutationUpdateUserCandidateIdsArgs, never>
+  >
 }
 
 export type SubscriptionResolvers<
@@ -259,8 +279,7 @@ export type SubscriptionResolvers<
     Maybe<ResolversTypes['Candidate']>,
     'candidateUpdates',
     ParentType,
-    ContextType,
-    RequireFields<SubscriptionCandidateUpdatesArgs, 'candidateId'>
+    ContextType
   >
 }
 
@@ -272,6 +291,7 @@ export type UserResolvers<
   userType?: Resolver<ResolversTypes['UserType'], ParentType, ContextType>
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  candidateIds?: Resolver<Array<ResolversTypes['Int']>, ParentType, ContextType>
   __isTypeOf?: IsTypeOfResolverFn<ParentType>
 }
 

@@ -12,6 +12,7 @@ export interface FetchUserContext_self {
   id: number;
   name: string;
   userType: UserType;
+  candidateIds: number[];
 }
 
 export interface FetchUserContext {
@@ -56,6 +57,41 @@ export interface CandidateSubscription_candidateUpdates {
 
 export interface CandidateSubscription {
   candidateUpdates: CandidateSubscription_candidateUpdates | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: IncreaseVoteCount
+// ====================================================
+
+export interface IncreaseVoteCount {
+  increaseVoteCount: boolean;
+}
+
+export interface IncreaseVoteCountVariables {
+  id: number;
+  count: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: UpdateUserCandidateIds
+// ====================================================
+
+export interface UpdateUserCandidateIds {
+  updateUserCandidateIds: boolean;
+}
+
+export interface UpdateUserCandidateIdsVariables {
+  candidateIds: number[];
 }
 
 /* tslint:disable */

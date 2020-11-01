@@ -29,4 +29,8 @@ export class User extends BaseEntity implements GraphqlUser {
     nullable: true,
   })
   name: string
+
+  // Order of array indicates preference of candidates.
+  @Column("simple-array")
+  candidateIds: number[]
 }

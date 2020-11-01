@@ -71,6 +71,7 @@ server.express.post(
     user.email = req.body.email
     user.name = req.body.name
     user.userType = UserType.User
+    user.candidateIds = []
 
     // save the User model to the database, refresh `user` to get ID
     user = await user.save()

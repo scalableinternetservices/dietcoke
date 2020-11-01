@@ -69,6 +69,23 @@ export const graphqlRoot: Resolvers<Context> = {
       ctx.pubsub.publish('SURVEY_UPDATE_' + surveyId, survey)
       return survey
     },
+    increaseVoteCount: async (_, { candidateId, count }, ctx) => {
+      console.log(candidateId)
+      const candidate = check(await Candidate.findOne({ where: { id: candidateId } }))
+      candidate.voteCount += (count ? count : 0)
+      await candidate.save()
+      return true
+    },
+    updateUserCandidateIds: async (_, { candidateIds }, ctx) => {
+      if (!ctx.user || !candidateIds) {
+        return false
+      }
+
+      ctx.user.candidateIds = candidateIds
+      ctx.user.save()
+      return true
+    }
+
   },
   Subscription: {
     surveyUpdates: {

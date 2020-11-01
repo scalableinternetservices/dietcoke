@@ -29,11 +29,17 @@ type Mutation {
 
   # Moves the survey to the next question (or starts it if it hasn't started). ADMIN only.
   nextSurveyQuestion (surveyId: Int!): Survey
+
+  # Increases the vote count for the given candidate.
+  increaseVoteCount(candidateId: Int, count: Int): Boolean!
+
+  # Sets a user's candidateIds array.
+  updateUserCandidateIds(candidateIds: [Int!]): Boolean!
 }
 
 type Subscription {
   surveyUpdates (surveyId: Int!): Survey
-  candidateUpdates (candidateId: Int!): Candidate
+  candidateUpdates: Candidate
 }
 
 type User {
@@ -41,6 +47,9 @@ type User {
   userType: UserType!
   email: String!
   name: String!
+
+  # May not include every candidate.
+  candidateIds: [Int!]!
 }
 
 type Candidate {
