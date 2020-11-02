@@ -44,7 +44,7 @@ export const graphqlRoot: Resolvers<Context> = {
       })
 
       return await Promise.all(newCandidates)
-    }
+    },
   },
   Mutation: {
     answerSurvey: async (_, { input }, ctx) => {
@@ -70,7 +70,6 @@ export const graphqlRoot: Resolvers<Context> = {
       return survey
     },
     increaseVoteCount: async (_, { candidateId, count }, ctx) => {
-      console.log(candidateId)
       const candidate = check(await Candidate.findOne({ where: { id: candidateId } }))
       candidate.voteCount += (count ? count : 0)
       await candidate.save()
@@ -84,8 +83,7 @@ export const graphqlRoot: Resolvers<Context> = {
       ctx.user.candidateIds = candidateIds
       ctx.user.save()
       return true
-    }
-
+    },
   },
   Subscription: {
     surveyUpdates: {

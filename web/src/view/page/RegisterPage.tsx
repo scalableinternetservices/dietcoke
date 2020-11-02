@@ -7,7 +7,7 @@ import { UserContext } from '../auth/user'
 import { AppRouteParams, PlaygroundApp } from '../nav/route'
 import { Page } from './Page'
 
-interface RegisterPageProps extends RouteComponentProps, AppRouteParams {}
+interface RegisterPageProps extends RouteComponentProps, AppRouteParams { }
 
 export function RegisterPage(props: RegisterPageProps) {
   return <Page>{getRegisterApp(props.app)}</Page>
@@ -15,10 +15,9 @@ export function RegisterPage(props: RegisterPageProps) {
 
 function getRegisterApp(app?: PlaygroundApp) {
   const { user } = useContext(UserContext)
-  console.log()
-  if (!user) {
-    return <Signup />
-  }
 
+  if (!user) {
+    return (<><Signup /> <Login /></>)
+  }
   return <Login />
 }
