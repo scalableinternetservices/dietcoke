@@ -1,4 +1,4 @@
-import { refetch, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { navigate, NavigateFn, RouteComponentProps } from '@reach/router'
 import * as React from 'react'
 import { useContext, useState } from 'react'
@@ -65,7 +65,6 @@ function getElectionApp(navgiate: NavigateFn) {
         increaseVoteCount(rankedCandidates[0], 1).catch(handleError)
         updateUserCandidateIds(rankedCandidates)
         setCongratulate(true)
-        refetch()
       }
     }
 
