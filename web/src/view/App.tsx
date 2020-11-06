@@ -36,7 +36,7 @@ export function init() {
 }
 
 export function App() {
-  const { loading, data } = useQuery<FetchUserContext>(fetchUser)
+  const { loading, data } = useQuery<FetchUserContext>(fetchUser, { pollInterval: 500 })
   if (loading || data == null) {
     return null
   }

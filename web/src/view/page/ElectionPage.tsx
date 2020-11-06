@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { navigate, NavigateFn, RouteComponentProps } from '@reach/router'
 import * as React from 'react'
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import { Candidate, FetchCandidates } from '../../graphql/query.gen'
 import { Button } from '../../style/button'
@@ -88,6 +88,7 @@ function getElectionApp(navgiate: NavigateFn) {
     if (!!user.hasVoted()) {
       return (
         <div className="mw6">
+          { congratulate ? congratulateModal : <></>}
           <header>
             <b>You already voted<br></br>View results</b>
           </header>
