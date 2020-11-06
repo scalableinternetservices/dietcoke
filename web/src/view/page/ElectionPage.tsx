@@ -1,7 +1,11 @@
 import { useQuery } from '@apollo/client'
 import { navigate, NavigateFn, RouteComponentProps } from '@reach/router'
+<<<<<<< HEAD
 import * as React from 'react'
 import { useContext, useState } from 'react'
+=======
+import React, { useContext, useState } from 'react'
+>>>>>>> b7e03e63a1b0c50c610b5bbb32b961ca865ee3c8
 import Modal from 'react-bootstrap/Modal'
 import { Candidate, FetchCandidates } from '../../graphql/query.gen'
 import { Button } from '../../style/button'
