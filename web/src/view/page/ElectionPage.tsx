@@ -86,7 +86,28 @@ function getElectionApp(navgiate: NavigateFn) {
     }
 
     if (!!user.hasVoted()) {
-      return <p> You've already voted. </p>
+      return (
+        <div className="mw6">
+          <header>
+            <b>You already voted<br></br>View results</b>
+          </header>
+          <p>Search for a candidate...</p>
+          <Input $onChange={setUserQuery} />
+          <Spacer $h4 />
+          {data.candidates
+            .filter(candidate => candidate.name.toLowerCase().includes(userQuery.toLowerCase()))
+            .sort((a, b) => b.voteCount - a.voteCount)
+            .map((candidate, i) => (
+              <div key={i} className="pa3 br2 mb2 bg-black-10 flex items-center">
+                <Spacer $w4 />
+                {candidate.name} · {candidate.voteCount}
+              </div>
+            ))}
+          <Spacer $h4 />
+          { rankedCandidates.length > 0 ? (<Button onClick={() => { setShowConfirmDialog(true) }}>Submit</Button>) : (<></>)}
+
+        </div>
+      )
     } else {
       return (
         <div className="mw6">
