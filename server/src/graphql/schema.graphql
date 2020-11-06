@@ -21,6 +21,7 @@ type Query {
   surveys: [Survey!]!
   survey (surveyId: Int!): Survey
   candidates: [Candidate!]!
+  calculateWinner: Candidate
 }
 
 type Mutation {

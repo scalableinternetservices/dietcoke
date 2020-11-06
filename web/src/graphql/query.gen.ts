@@ -65,6 +65,26 @@ export interface CandidateSubscription {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: CalculateWinner
+// ====================================================
+
+export interface CalculateWinner_calculateWinner {
+  __typename: "Candidate";
+  id: number;
+  voteCount: number;
+  name: string;
+}
+
+export interface CalculateWinner {
+  calculateWinner: CalculateWinner_calculateWinner | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: IncreaseVoteCount
 // ====================================================
 
