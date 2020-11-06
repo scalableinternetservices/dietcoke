@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { navigate, NavigateFn, RouteComponentProps } from '@reach/router'
 import * as React from 'react'
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import { Candidate, FetchCandidates } from '../../graphql/query.gen'
 import { Button } from '../../style/button'
@@ -15,13 +15,17 @@ import { increaseVoteCount } from './mutateCandidate'
 import { updateUserCandidateIds } from './mutateUser'
 import { Page } from './Page'
 
-interface ElectionPageProps extends RouteComponentProps, AppRouteParams { }
-
-export function ElectionPage(props: ElectionPageProps) {
-  return <Page>{getElectionApp(props.navigate!)}</Page>
+export interface UserRefetch {
+  userRefetch(): any
 }
 
-function getElectionApp(navgiate: NavigateFn) {
+interface ElectionPageProps extends RouteComponentProps, AppRouteParams, UserRefetch { }
+
+export function ElectionPage(props: ElectionPageProps) {
+  return <Page>{getElectionApp(props.navigate!, props.userRefetch)}</Page>
+}
+
+function getElectionApp(navgiate: NavigateFn, userRefetch: any) {
   const [userQuery, setUserQuery] = useState('')
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [congratulate, setCongratulate] = useState(false)
@@ -42,7 +46,9 @@ function getElectionApp(navgiate: NavigateFn) {
       </Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={() => { navigate("../../" + Route.HOME) }}> Return Home </Button>
+        <Button onClick={() => {
+          navigate("../../" + Route.HOME)
+        }}> Return Home </Button>
       </Modal.Footer>
     </Modal>
   )
@@ -65,6 +71,7 @@ function getElectionApp(navgiate: NavigateFn) {
         increaseVoteCount(rankedCandidates[0], 1).catch(handleError)
         updateUserCandidateIds(rankedCandidates)
         setCongratulate(true)
+        userRefetch()
       }
     }
 

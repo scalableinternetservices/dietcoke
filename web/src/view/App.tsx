@@ -36,19 +36,19 @@ export function init() {
 }
 
 export function App() {
-  const { loading, data } = useQuery<FetchUserContext>(fetchUser, { pollInterval: 500 })
+  const { loading, data, refetch } = useQuery<FetchUserContext>(fetchUser, { pollInterval: 500 })
   if (loading || data == null) {
     return null
   }
 
   return (
     <UserContext.Provider value={new UserCtx(data.self)}>
-      <AppBody />
+      <AppBody userRefetch={refetch} />
     </UserContext.Provider>
   )
 }
 
-export function AppBody() {
+export function AppBody(props: any) {
   return (
     <>
       <Router className={bodyClass}>
@@ -59,7 +59,7 @@ export function AppBody() {
         <ProjectsPage path={Route.PROJECTS} />
         <PlaygroundPage path={Route.PLAYGROUND} />
         <PlaygroundPage path={Route.PLAYGROUND_APP} />
-        <ElectionPage path={Route.ELECTION} />
+        <ElectionPage path={Route.ELECTION} userRefetch={props.userRefetch} />
         <RegisterPage path={Route.REGISTER} />
       </Router>
       <Footer>
