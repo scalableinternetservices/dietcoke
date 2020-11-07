@@ -1,9 +1,9 @@
 require('honeycomb-beeline')({
   writeKey: process.env.HONEYCOMB_KEY || '6334e177959517b1f6e58da8e9f3f332',
-  dataset: process.env.APP_NAME || 'bespin',
+  dataset: process.env.APP_NAME || 'dietcoke',
   serviceName: process.env.APPSERVER_TAG || 'local',
   enabledInstrumentations: ['express', 'mysql2', 'react-dom/server'],
-  sampleRate: 10,
+  //sampleRate: 10,
 })
 
 import assert from 'assert'

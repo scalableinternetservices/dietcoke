@@ -16,9 +16,9 @@ export function HomePage(props: HomePageProps) {
   return (
     <Page>
       <Hero>
-        <H1>CS 188</H1>
-        <H3>Scalable Internet Services</H3>
-        <H3>UCLA, Fall 2020</H3>
+        <H1>Electify</H1>
+        <H3>Modernizing Democracy</H3>
+        <H3>slugname: dietcoke</H3>
       </Hero>
       <Content>
         <LContent>
