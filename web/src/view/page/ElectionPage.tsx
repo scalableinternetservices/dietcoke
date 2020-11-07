@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client'
 import { navigate, NavigateFn, RouteComponentProps } from '@reach/router'
-import React, { useContext, useState } from 'react'
+import * as React from 'react'
+import { useContext, useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
-import { Candidate, FetchCandidates } from '../../graphql/query.gen'
+import { CalculateWinner, Candidate, FetchCandidates } from '../../graphql/query.gen'
 import { Button } from '../../style/button'
 import { Input } from '../../style/input'
 import { Spacer } from '../../style/spacer'
@@ -10,6 +11,7 @@ import { UserContext } from '../auth/user'
 import { AppRouteParams, getPath, Route } from '../nav/route'
 import { handleError } from '../toast/error'
 import { fetchCandidates } from './fetchCandidates'
+import { fetchWinner } from './fetchWinner'
 import { increaseVoteCount } from './mutateCandidate'
 import { updateUserCandidateIds } from './mutateUser'
 import { Page } from './Page'
@@ -26,6 +28,8 @@ function getElectionApp(navgiate: NavigateFn) {
   const [congratulate, setCongratulate] = useState(false)
 
   const { loading, data } = useQuery<FetchCandidates>(fetchCandidates)
+
+  const candidateWinnerFetch = useQuery<CalculateWinner>(fetchWinner)
 
   const [rankedCandidates, setRankedCandidates] = useState([] as number[])
   const user = useContext(UserContext)
@@ -46,7 +50,7 @@ function getElectionApp(navgiate: NavigateFn) {
     </Modal>
   )
 
-  if (user) {
+  if (user && user.user) {
     function doVoteForCandidate(candidate: Candidate) {
       const id = candidate.id
       const candidateRank = rankedCandidates.indexOf(id)
@@ -64,6 +68,7 @@ function getElectionApp(navgiate: NavigateFn) {
         increaseVoteCount(rankedCandidates[0], 1).catch(handleError)
         updateUserCandidateIds(rankedCandidates)
         setCongratulate(true)
+        candidateWinnerFetch.refetch()
       }
     }
 
