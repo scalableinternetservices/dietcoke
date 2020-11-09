@@ -67,7 +67,6 @@ export const graphqlRoot: Resolvers<Context> = {
       }
 
       if (max > totalVoteCount / 2) {
-        console.log(maxCandidate)
         return maxCandidate
       }
 
@@ -85,28 +84,30 @@ export const graphqlRoot: Resolvers<Context> = {
 
         minCandidateIds.push(minCandidate!.id)
 
-        const candidateMap: Map<number, number> = new Map<number, number>()
+
+        const candidateMap: { [index: number]: number } = {}
         for (const candidate of candidates) {
-          candidateMap.set(candidate.id, 0)
+          candidateMap[candidate.id] = 0
         }
 
         for (let i = 0; i < users.length; i++) {
           for (const id of users[i].candidateIds) {
-            if (!minCandidateIds.includes(id)) {
-              candidateMap.set(id, candidateMap.get(id)! + 1)
+            if (!minCandidateIds.find((candId) => (id as number) == candId)) {
+              candidateMap[id]++
               break
             }
           }
         }
 
-        for (const [id, count] of candidateMap.entries()) {
-          if (count > totalVoteCount / 2) {
-            console.log(candidates.find((candidate) => candidate.id === id)!)
-            return candidates.find((candidate) => candidate.id === id)!
+        console.log(candidateMap)
+
+        for (const candidate of candidates) {
+          if (candidateMap[candidate.id] > totalVoteCount / 2) {
+            return candidates.find((cand) => cand.id === candidate.id)!
           }
         }
       }
-
+      console.log("stf")
       return null
 
     },
