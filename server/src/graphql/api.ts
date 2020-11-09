@@ -84,7 +84,6 @@ export const graphqlRoot: Resolvers<Context> = {
 
         minCandidateIds.push(minCandidate!.id)
 
-
         const candidateMap: { [index: number]: number } = {}
         for (const candidate of candidates) {
           candidateMap[candidate.id] = 0
@@ -99,15 +98,13 @@ export const graphqlRoot: Resolvers<Context> = {
           }
         }
 
-        console.log(candidateMap)
-
         for (const candidate of candidates) {
           if (candidateMap[candidate.id] > totalVoteCount / 2) {
             return candidates.find((cand) => cand.id === candidate.id)!
           }
         }
       }
-      console.log("stf")
+
       return null
 
     },
