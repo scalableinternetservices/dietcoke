@@ -45,6 +45,69 @@ export const graphqlRoot: Resolvers<Context> = {
 
       return await Promise.all(newCandidates)
     },
+    calculateWinner: async () => {
+      const candidates = await Candidate.find()
+      const minCandidateIds: number[] = []
+      const users = await User.find()
+
+      let max = -1
+      let maxCandidate: Candidate | null = null
+      let totalVoteCount = 0
+
+      for (let i = 0; i < candidates.length; i++) {
+        totalVoteCount += candidates[i].voteCount
+        if (maxCandidate == null || candidates[i].voteCount > max) {
+          max = candidates[i].voteCount
+          maxCandidate = candidates[i]
+        }
+      }
+
+      if (totalVoteCount == 0) {
+        return null
+      }
+
+      if (max > totalVoteCount / 2) {
+        return maxCandidate
+      }
+
+      while (minCandidateIds.length < candidates.length) {
+        let min = -1
+        let minCandidate: Candidate | null = null
+
+        for (let i = 0; i < candidates.length; i++) {
+          if (minCandidate == null || candidates[i].voteCount < min &&
+            !minCandidateIds.includes(candidates[i].id)) {
+            min = candidates[i].voteCount
+            minCandidate = candidates[i]
+          }
+        }
+
+        minCandidateIds.push(minCandidate!.id)
+
+        const candidateMap: { [index: number]: number } = {}
+        for (const candidate of candidates) {
+          candidateMap[candidate.id] = 0
+        }
+
+        for (let i = 0; i < users.length; i++) {
+          for (const id of users[i].candidateIds) {
+            if (!minCandidateIds.find((candId) => (id as number) == candId)) {
+              candidateMap[id]++
+              break
+            }
+          }
+        }
+
+        for (const candidate of candidates) {
+          if (candidateMap[candidate.id] > totalVoteCount / 2) {
+            return candidates.find((cand) => cand.id === candidate.id)!
+          }
+        }
+      }
+
+      return null
+
+    },
   },
   Mutation: {
     answerSurvey: async (_, { input }, ctx) => {
@@ -84,6 +147,7 @@ export const graphqlRoot: Resolvers<Context> = {
       ctx.user.save()
       return true
     },
+
   },
   Subscription: {
     surveyUpdates: {
