@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { navigate, NavigateFn, RouteComponentProps } from '@reach/router'
+import { navigate, RouteComponentProps } from '@reach/router'
 import * as React from 'react'
 import { useContext, useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
@@ -23,10 +23,10 @@ export interface UserRefetch {
 interface ElectionPageProps extends RouteComponentProps, AppRouteParams, UserRefetch { }
 
 export function ElectionPage(props: ElectionPageProps) {
-  return <Page>{getElectionApp(props.navigate!, props.userRefetch)}</Page>
+  return <Page>{getElectionApp()}</Page>
 }
 
-function getElectionApp(navgiate: NavigateFn, userRefetch: any) {
+function getElectionApp() {
   const [userQuery, setUserQuery] = useState('')
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [congratulate, setCongratulate] = useState(false)
@@ -107,11 +107,19 @@ function getElectionApp(navgiate: NavigateFn, userRefetch: any) {
           <Spacer $h4 />
           {data.candidates
             .filter(candidate => candidate.name.toLowerCase().includes(userQuery.toLowerCase()))
-            .sort((a, b) => b.voteCount - a.voteCount)
+            .sort((a, b) => {
+              if (b.name < a.name) {
+                return -1
+              } else if (b.name == a.name) {
+                return 0
+              } else {
+                return 1
+              }
+            })
             .map((candidate, i) => (
               <div key={i} className="pa3 br2 mb2 bg-black-10 flex items-center">
                 <Spacer $w4 />
-                {candidate.name} · {candidate.voteCount}
+                {candidate.name}
               </div>
             ))}
           <Spacer $h4 />
@@ -152,12 +160,20 @@ function getElectionApp(navgiate: NavigateFn, userRefetch: any) {
           <Spacer $h4 />
           {data.candidates
             .filter(candidate => candidate.name.toLowerCase().includes(userQuery.toLowerCase()))
-            .sort((a, b) => b.voteCount - a.voteCount)
+            .sort((a, b) => {
+              if (b.name < a.name) {
+                return 1
+              } else if (b.name == a.name) {
+                return 0
+              } else {
+                return -1
+              }
+            })
             .map((candidate, i) => (
               <div key={i} className="pa3 br2 mb2 bg-black-10 flex items-center">
                 <Button onClick={() => doVoteForCandidate(candidate)}>{getRank(candidate.id)}</Button>
                 <Spacer $w4 />
-                {candidate.name} · {candidate.voteCount}
+                {candidate.name}
               </div>
             ))}
           <Spacer $h4 />

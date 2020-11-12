@@ -37,7 +37,7 @@ export function init() {
 }
 
 export function App() {
-  const { loading, data, refetch } = useQuery<FetchUserContext>(fetchUser, { pollInterval: 500 })
+  const { loading, data, refetch } = useQuery<FetchUserContext>(fetchUser, { pollInterval: 1000 })
   if (loading || data == null) {
     return null
   }
@@ -62,7 +62,7 @@ export function AppBody(props: any) {
         <PlaygroundPage path={Route.PLAYGROUND_APP} />
         <ElectionPage path={Route.ELECTION} userRefetch={props.userRefetch} />
         <RegisterPage path={Route.REGISTER} />
-        <ResultsPage path={Route.RESULTS}/>
+        <ResultsPage path={Route.RESULTS} />
       </Router>
       <Footer>
         <FooterText>© 2020 John Rothfels</FooterText>
