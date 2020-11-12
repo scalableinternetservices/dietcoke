@@ -27,8 +27,8 @@ const otherTabs = [
     path: getPath(Route.REGISTER),
   },
   {
-    name: 'about',
-    path: getPath(Route.ABOUT),
+    name: 'results',
+    path: getPath(Route.RESULTS),
   },
 ]
 

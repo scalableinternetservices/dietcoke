@@ -19,6 +19,7 @@ module.exports = {
     'plugin:react/recommended',
   ],
   rules: {
+    'prettier/prettier': 0,
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',

@@ -1,16 +1,6 @@
 import { useQuery } from '@apollo/client'
-import { navigate, NavigateFn, RouteComponentProps } from '@reach/router'
-<<<<<<< HEAD
-<<<<<<< HEAD
-import * as React from 'react'
-import { useContext, useState } from 'react'
-=======
+import { NavigateFn, RouteComponentProps } from '@reach/router'
 import React, { useContext, useState } from 'react'
->>>>>>> b7e03e63a1b0c50c610b5bbb32b961ca865ee3c8
-=======
-import * as React from 'react'
-import { useContext, useState } from 'react'
->>>>>>> 01cf0b1ade87197f9112c67e3097a1b95d88aa3c
 import Modal from 'react-bootstrap/Modal'
 import { CalculateWinner, Candidate, FetchCandidates } from '../../graphql/query.gen'
 import { Button } from '../../style/button'
@@ -35,7 +25,7 @@ export function ElectionPage(props: ElectionPageProps) {
   return <Page>{getElectionApp(props.navigate!, props.userRefetch)}</Page>
 }
 
-function getElectionApp(navgiate: NavigateFn, userRefetch: any) {
+function getElectionApp(navigate: NavigateFn, userRefetch: any) {
   const [userQuery, setUserQuery] = useState('')
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [congratulate, setCongratulate] = useState(false)
@@ -83,11 +73,7 @@ function getElectionApp(navgiate: NavigateFn, userRefetch: any) {
         increaseVoteCount(rankedCandidates[0], 1).catch(handleError)
         updateUserCandidateIds(rankedCandidates)
         setCongratulate(true)
-<<<<<<< HEAD
-        userRefetch()
-=======
         candidateWinnerFetch.refetch()
->>>>>>> 01cf0b1ade87197f9112c67e3097a1b95d88aa3c
       }
     }
 
