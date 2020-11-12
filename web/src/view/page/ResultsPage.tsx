@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { RouteComponentProps } from '@reach/router';
-import React, { useContext, useState } from 'react';
+import * as React from 'react';
+import { useContext, useState } from 'react';
 import { CalculateWinner, FetchCandidates } from '../../graphql/query.gen';
 import { Spacer } from '../../style/spacer';
 import { UserContext } from '../auth/user';

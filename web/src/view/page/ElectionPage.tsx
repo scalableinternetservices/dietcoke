@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
-import { NavigateFn, RouteComponentProps } from '@reach/router'
-import React, { useContext, useState } from 'react'
+import { navigate, NavigateFn, RouteComponentProps } from '@reach/router'
+import * as React from 'react'
+import { useContext, useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import { CalculateWinner, Candidate, FetchCandidates } from '../../graphql/query.gen'
 import { Button } from '../../style/button'
@@ -25,7 +26,7 @@ export function ElectionPage(props: ElectionPageProps) {
   return <Page>{getElectionApp(props.navigate!, props.userRefetch)}</Page>
 }
 
-function getElectionApp(navigate: NavigateFn, userRefetch: any) {
+function getElectionApp(navgiate: NavigateFn, userRefetch: any) {
   const [userQuery, setUserQuery] = useState('')
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
   const [congratulate, setCongratulate] = useState(false)
