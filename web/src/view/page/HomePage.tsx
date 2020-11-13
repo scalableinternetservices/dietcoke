@@ -6,10 +6,10 @@ import { Spacer } from '../../style/spacer'
 import { style } from '../../style/styled'
 import { BodyText } from '../../style/text'
 import { Link } from '../nav/Link'
-import { AppRouteParams, getPath, Route } from '../nav/route'
+import { AppRouteParams } from '../nav/route'
 import { Page } from './Page'
 
-interface HomePageProps extends RouteComponentProps, AppRouteParams {}
+interface HomePageProps extends RouteComponentProps, AppRouteParams { }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function HomePage(props: HomePageProps) {
@@ -23,83 +23,46 @@ export function HomePage(props: HomePageProps) {
       <Content>
         <LContent>
           <Section>
-            <H2>About CS 188</H2>
+            <H2>About Electify</H2>
             <Spacer $h4 />
             <BodyText>
-              ☝️ This course explores advanced topics in highly scalable internet services and their underlying
-              architecture.
+              This website shows how ranked voting could be executed online in an ideal world.
             </BodyText>
             <Spacer $h4 />
             <BodyText>
-              Software today is increasingly delivered as a service: accessible globally via web browsers and mobile
-              applications and backed by millions of servers. Modern technologies and platforms are making it easier to
-              build and deploy these systems. Yet despite these advances, some concerns just don't go away. Building
-              scalable services today still requires an understanding of topics like concurrency, caching, load
-              balancing, and observability. In this course we will examine the state of the art.
+              Of course, having a secure election online is
+              very difficult. However, this website serves as a proof of concept about how ranked voting could help eliminate
+              the two party system and could even replace the way we vote today.
             </BodyText>
           </Section>
           <Section>
             <H2>Getting Started</H2>
             <Spacer $h4 />
-            <BodyText>In the first week of class, please complete the following:</BodyText>
-            <Spacer $h4 />
-            <BodyText>
-              <ul className="pl4">
-                <li>
-                  Follow the <Link href="https://github.com/rothfels/bespin#quickstart">project Quickstart</Link> to
-                  configure your dev environment.
-                </li>
-                <li>
-                  Find a project team. See <Link to={getPath(Route.PROJECTS)}>Projects</Link> for details.
-                </li>
-                <li>
-                  Join the <Link href="https://piazza.com/ucla/fall2020/cs188">CS188 Piazza</Link>.
-                </li>
-              </ul>
-            </BodyText>
+            <BodyText>Please login or register in order to vote. Then visit the election page.</BodyText>
           </Section>
         </LContent>
         <RContent>
           <Section>
-            <H2>Course Information</H2>
+            <H2>Team Information</H2>
             <Spacer $h4 />
             <BodyText>
               <table>
                 <tbody>
                   <tr>
-                    <TD>👨‍🏫</TD>
-                    <TD>John Rothfels</TD>
+                    <TD>🧔🏻</TD>
+                    <TD>Jonathan Garcia-Rovetta</TD>
                   </tr>
                   <tr>
-                    <TD>✉️</TD>
-                    <TD>
-                      <Link href="mailto://rothfels@cs.ucla.edu">rothfels@cs.ucla.edu</Link>
-                    </TD>
+                    <TD>🙆🏻‍♂️</TD>
+                    <TD>Steven Lara</TD>
                   </tr>
                   <tr>
-                    <TD>⏯</TD>
-                    <TD>
-                      <Link href="https://ucla.zoom.us/j/92470409406?pwd=eFpyYWFQZGRtcVUzWC9HYlhSakRxZz09">Zoom</Link>
-                    </TD>
+                    <TD>👁️👄👁️</TD>
+                    <TD>Jordan Tyner</TD>
                   </tr>
                   <tr>
-                    <TD>🕒</TD>
-                    <TD>
-                      <div>
-                        <b>Tue, Thu</b> · 8:00 - 9:50am
-                      </div>
-                    </TD>
-                  </tr>
-                  <tr>
-                    <TD></TD>
-                    <TD>
-                      <div>
-                        <b>Fri</b> · 12:00 - 1:50pm
-                      </div>
-                      <div>
-                        <b>Fri</b> · 2:00 - 3:50pm
-                      </div>
-                    </TD>
+                    <TD>👨🏻</TD>
+                    <TD>Simón Zeiger</TD>
                   </tr>
                 </tbody>
               </table>
@@ -111,41 +74,13 @@ export function HomePage(props: HomePageProps) {
             <BodyText>
               <ul className="ml4">
                 <li>
-                  <Link block href="https://www.typescriptlang.org/docs/handbook/intro.html">
-                    TypeScript handbook
-                  </Link>
-                  <Link block href="https://basarat.gitbook.io/typescript/">
-                    TypeScript deep-dive
+                  <Link block href="https://en.wikipedia.org/wiki/Ranked_voting">
+                    Ranked voting info
                   </Link>
                 </li>
                 <li>
-                  <Link block href="https://www.typescriptlang.org/play">
-                    TypeScript playground
-                  </Link>
-                </li>
-                <li>
-                  <Link block href="https://reactjs.org/tutorial/tutorial.html">
-                    React tutorial
-                  </Link>
-                </li>
-                <li>
-                  <Link block href="https://reactjs.org/docs/hello-world.html">
-                    React docs
-                  </Link>
-                </li>
-                <li>
-                  <Link block href="https://www.apollographql.com/docs/react/data/queries/">
-                    Apollo client docs
-                  </Link>
-                </li>
-                <li>
-                  <Link block href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch">
-                    <code>fetch</code> docs
-                  </Link>
-                </li>
-                <li>
-                  <Link block href="#">
-                    Project troubleshooting
+                  <Link block href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                    Important link
                   </Link>
                 </li>
               </ul>

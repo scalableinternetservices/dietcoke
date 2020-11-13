@@ -17,12 +17,3 @@ export const fetchCandidates = gql`
   }
   ${fragmentCandidate}
 `
-
-export const subscribeCandidate = gql`
-  subscription CandidateSubscription {
-    candidateUpdates {
-      ...Candidate
-    }
-  }
-  ${fragmentCandidate}
-`

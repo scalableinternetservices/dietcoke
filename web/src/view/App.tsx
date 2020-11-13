@@ -13,7 +13,6 @@ import { Route } from './nav/route'
 import { ElectionPage } from './page/ElectionPage'
 import { HomePage } from './page/HomePage'
 import { LecturesPage } from './page/LecturesPage'
-import { PlaygroundPage } from './page/PlaygroundPage'
 import { ProjectsPage } from './page/ProjectsPage'
 import { RegisterPage } from './page/RegisterPage'
 import { ResultsPage } from './page/ResultsPage'
@@ -58,8 +57,6 @@ export function AppBody(props: any) {
         <HomePage path={Route.HOME} />
         <LecturesPage path={Route.LECTURES} />
         <ProjectsPage path={Route.PROJECTS} />
-        <PlaygroundPage path={Route.PLAYGROUND} />
-        <PlaygroundPage path={Route.PLAYGROUND_APP} />
         <ElectionPage path={Route.ELECTION} userRefetch={props.userRefetch} />
         <RegisterPage path={Route.REGISTER} />
         <ResultsPage path={Route.RESULTS} />
