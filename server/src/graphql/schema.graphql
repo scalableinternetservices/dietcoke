@@ -11,26 +11,18 @@
 schema {
   query: Query
   mutation: Mutation
-  subscription: Subscription
+  #subscription: Subscription
 }
 
 type Query {
   # Returns the logged-in user making the query, or null if anonymous.
   self: User
 
-  surveys: [Survey!]!
-  survey (surveyId: Int!): Survey
   candidates: [Candidate!]!
   calculateWinner: Candidate
 }
 
 type Mutation {
-  # Records an answer to a survey question presented in class.
-  answerSurvey (input: SurveyInput!): Boolean!
-
-  # Moves the survey to the next question (or starts it if it hasn't started). ADMIN only.
-  nextSurveyQuestion (surveyId: Int!): Survey
-
   # Increases the vote count for the given candidate.
   increaseVoteCount(candidateId: Int, count: Int): Boolean!
 
@@ -38,10 +30,9 @@ type Mutation {
   updateUserCandidateIds(candidateIds: [Int!]): Boolean!
 }
 
-type Subscription {
-  surveyUpdates (surveyId: Int!): Survey
-  candidateUpdates: Candidate
-}
+# type Subscription {
+
+# }
 
 type User {
   id: Int!
@@ -60,50 +51,3 @@ type Candidate {
 }
 
 enum UserType { ADMIN, USER }
-
-type Survey {
-  id: Int!
-
-  # Pretty name for the survey.
-  name: String!
-
-  # True if the survey has started.
-  isStarted: Boolean!
-
-  # True if the survey has completed.
-  isCompleted: Boolean!
-
-  # The current survey question, or null if the survey hasn't started.
-  currentQuestion: SurveyQuestion
-
-  # All the survey's questions, in presentation order.
-  questions: [SurveyQuestion]!
-}
-
-type SurveyQuestion {
-  id: Int!
-
-  # The prompt, e.g. "how long have you been programming".
-  prompt: String!
-
-  # The choices available if multiple choice, null if not multiple choice.
-  choices: [String!]
-
-  # All answers received so far for the question.
-  answers: [SurveyAnswer!]!
-
-  # The Survey that this question is on.
-  survey: Survey!
-}
-
-type SurveyAnswer {
-  id: Int!
-  answer: String!
-  question: SurveyQuestion!
-}
-
-input SurveyInput {
-  questionId: Int!
-  answer: String!
-}
-

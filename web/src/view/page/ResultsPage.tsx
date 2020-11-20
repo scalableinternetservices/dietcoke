@@ -20,7 +20,7 @@ function getResultsApp(app?: PlaygroundApp) {
   const user = useContext(UserContext)
   const [userQuery] = useState('')
   const { data } = useQuery<FetchCandidates>(fetchCandidates)
-  const candidateWinnerFetch = useQuery<CalculateWinner>(fetchWinner)
+  const candidateWinnerFetch = useQuery<CalculateWinner>(fetchWinner, { pollInterval: 1000 })
 
 
   if (user && user.user) {
