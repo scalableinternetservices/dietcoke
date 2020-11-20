@@ -7,7 +7,6 @@ import { User } from '../entities/User'
 import { Resolvers } from './schema.types'
 
 export const pubsub = new PubSub()
-const beeline = require('honeycomb-beeline')()
 
 export function getSchema() {
   const schema = readFileSync(path.join(__dirname, 'schema.graphql'))
