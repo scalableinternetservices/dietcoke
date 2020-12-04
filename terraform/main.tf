@@ -26,7 +26,7 @@ module "webserver" {
   # redis_host = module.redis.host
 
   services      = "BACKGROUND"
-  honeycomb_key = <insert key here>
+  honeycomb_key = "6334e177959517b1f6e58da8e9f3f332"
 
   # ws_url = module.websocket_api.url
 }
