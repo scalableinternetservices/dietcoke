@@ -1,16 +1,16 @@
-import { useQuery } from '@apollo/client';
-import { RouteComponentProps } from '@reach/router';
-import * as React from 'react';
-import { useContext, useState } from 'react';
-import { CalculateWinner, FetchCandidates } from '../../graphql/query.gen';
-import { Spacer } from '../../style/spacer';
-import { UserContext } from '../auth/user';
-import { AppRouteParams, getPath, PlaygroundApp, Route } from "../nav/route";
-import { fetchCandidates } from './fetchCandidates';
-import { fetchWinner } from './fetchWinner';
-import { Page } from './Page';
+import { useQuery } from '@apollo/client'
+import { RouteComponentProps } from '@reach/router'
+import * as React from 'react'
+import { useContext, useState } from 'react'
+import { CalculateWinner, FetchCandidates } from '../../graphql/query.gen'
+import { Spacer } from '../../style/spacer'
+import { UserContext } from '../auth/user'
+import { AppRouteParams, getPath, PlaygroundApp, Route } from '../nav/route'
+import { fetchCandidates } from './fetchCandidates'
+import { fetchWinner } from './fetchWinner'
+import { Page } from './Page'
 
-interface ResultsPageProps extends RouteComponentProps, AppRouteParams { }
+interface ResultsPageProps extends RouteComponentProps, AppRouteParams {}
 
 export function ResultsPage(props: ResultsPageProps) {
   return <Page>{getResultsApp(props.app)}</Page>
@@ -22,13 +22,9 @@ function getResultsApp(app?: PlaygroundApp) {
   const { data } = useQuery<FetchCandidates>(fetchCandidates)
   const candidateWinnerFetch = useQuery<CalculateWinner>(fetchWinner, { pollInterval: 1000 })
 
-
   if (user && user.user) {
     if (!data || data.candidates.length === 0) {
       return <div>no candidates</div>
-    }
-    if (!candidateWinnerFetch.data?.calculateWinner) {
-      return <div>Problem Fetching Winner</div>
     }
 
     if (!user.hasVoted()) {
@@ -38,7 +34,11 @@ function getResultsApp(app?: PlaygroundApp) {
     return (
       <div>
         <header>
-          {candidateWinnerFetch.data?.calculateWinner.name} is the current leader.
+          {candidateWinnerFetch.data?.calculateWinner ? (
+            <div>{candidateWinnerFetch.data?.calculateWinner.name} is the current leader.</div>
+          ) : (
+            <div>There is no current leader.</div>
+          )}
         </header>
         <Spacer $h4 />
         {data.candidates
@@ -53,6 +53,11 @@ function getResultsApp(app?: PlaygroundApp) {
       </div>
     )
   } else {
-    return <div> Please <a href={getPath(Route.REGISTER)}>Register or Login</a></div>
+    return (
+      <div>
+        {' '}
+        Please <a href={getPath(Route.REGISTER)}>Register or Login</a>
+      </div>
+    )
   }
 }
